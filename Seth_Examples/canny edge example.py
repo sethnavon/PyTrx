@@ -77,13 +77,13 @@ ax1[0,0].imshow(image1, cmap='gray')
 ax1[0,0].set_ylabel('7/12/2019', fontsize=10)
 # ax1[0,0].set_title('Greyscale image')
 
-ax1[0,1].plot(rowsum)
+ax1[0,1].plot(rowsum, np.arange(rows1))
 # ax1[0,1].set_title('# of edge pixels by row')
 
 ax1[1,0].imshow(image2, cmap='gray')
 ax1[1,0].set_ylabel('8/10/2019', fontsize=10)
 
-ax1[1,1].plot(rowsum2)
+ax1[1,1].plot(rowsum2, np.arange(rows2))
 
 ax1[1,2].plot(edges4line, color = "red", linewidth=1)
 ax1[1,2].imshow(edges3, cmap='gray')
@@ -95,13 +95,23 @@ ax1[0,2].imshow(edges1, cmap='gray')
 ax1[2,0].imshow(image3, cmap='gray')
 ax1[2,0].set_ylabel('9/04/2019', fontsize=10)
 
-ax1[2,1].plot(rowsum3)
+ax1[2,1].plot(rowsum3, np.arange(rows3))
 
 ax1[2,2].plot(edges6line, color = "red", linewidth=1)
 ax1[2,2].imshow(edges5, cmap='gray')
 
 # fig1.tight_layout()
 fig1.savefig(directory + '/results/fig1.png', dpi = 600)
+
+## invert y-axes
+for row in range(3):
+    ax1[row,1].invert_yaxis()
+
+## Make sure all axes have same size/shape
+for row in range(3):
+    for col in range(3):
+        ax1[row,col].set_box_aspect(image2.shape[0]/image2.shape[1])
+# plt.tight_layout()
 
 plt.show()
 
